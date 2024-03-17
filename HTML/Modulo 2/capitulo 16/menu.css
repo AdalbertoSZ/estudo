@@ -1,0 +1,130 @@
+/*@charset "UTF-8"
+*/
+@font-face {
+    font-family: idroid;
+    src: url(idroid.otf);
+}
+:root {
+    --corlink: rgb(35, 190, 35);
+    --cordestaque: rgb(35, 190, 35);
+}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(99, 241, 194);
+    margin: 0px;
+}
+header {
+    background-image: linear-gradient(to top , rgb(6, 77, 6) , rgb(56, 230, 56)) ;
+    text-align: center;
+    color: white;
+   
+}
+header h1 {
+    margin: 0px;
+    padding: 10px;
+}
+nav {
+    text-align: left;
+    
+}
+nav ul {
+    list-style: none;
+    display: flex;
+    padding: 10px;
+    margin: 0px;
+}
+nav a {
+    margin: 15px;
+    color: white;
+    text-decoration: none;
+    
+}
+main {
+    background-color: white;
+    padding: 10px;
+    margin-top: 0px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+.hist {
+    margin: 0;
+}
+.hist h1 {
+    margin: 0px;
+    color: green;
+    font-family: idroid;
+}
+.hist h2 {
+    color: green;
+    background-image: linear-gradient(to left, white, rgb(219, 241, 250));
+    font-family: idroid;
+}
+.hist strong {
+    color: var(--cordestaque);
+}
+.hist p {
+    text-indent: 20px;
+    text-align: justify;
+}
+.hist a{
+    text-decoration: none;
+    color: var(--corlink);
+}
+.hist a::after {
+    content: '🔗';
+}
+.imagem {
+    text-align: center;
+}
+.pos {
+    margin: 0 50px 0 50px;
+    background-color: white;
+    padding: 10px;
+}
+.pos a {
+    text-decoration: none;
+    color: var(--corlink);
+}
+.pos a::after{
+    content: '🔗';
+}
+.pos p{
+    text-align: justify;
+    text-indent: 20px;
+}
+.pos strong {
+    color: var(--cordestaque);
+}
+.video {
+    text-align: center;
+    background-color: darkgreen;
+    margin: 0 50px 0 50px;
+    padding: 10px;
+}
+.extra {
+    background-color: rgb(188, 231, 248);
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px  rgba(0, 0, 0, 0.356);
+} 
+.extra h3 {
+    font-size: 0.9em;
+    padding: 10px;
+    background-color: rgb(42, 173, 42);
+    color: white;
+    border-radius: 10px 10px 0 0 ;
+}
+.extra p {
+    padding: 0 10px 0 10px;
+}
+.extra ul {
+    list-style: none;
+    column-count: 2; 
+}
+footer{
+    background-color: rgb(37, 85, 22);
+    color: white;
+    text-align: center;
+}
+footer p{
+    padding: 10px;
+}
