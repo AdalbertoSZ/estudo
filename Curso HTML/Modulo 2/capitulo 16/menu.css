@@ -16,11 +16,11 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-color: var(--cor3);
+    background-color: var(--cor1);
     margin: 0px;
 }
 header {
-    background-image: linear-gradient(to top , rgb(6, 77, 6) , rgb(56, 230, 56)) ;
+    background-image: linear-gradient(to top , var(--cor5) , var(--cor2)) ;
     text-align: center;
     color: white;
 }
@@ -34,8 +34,8 @@ nav {
     text-align: left;
 }
 nav ul {
-    list-style: none;
-    display: flex;
+    list-style-type: '\2714\0020\0020';
+    list-style-position: inside;
     padding: 10px;
     margin: 0px;
 }
@@ -43,14 +43,18 @@ nav a {
     margin: 15px;
     color: white;
     text-decoration: none;
+    padding: 5px;
     
+}
+nav a:hover{
+    background-color: var(--cor4);
+    border-radius: 5px;
 }
 main {
     background-color: white;
     padding: 10px;
-    margin-top: 0px;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin: auto;
+    max-width: 800px;
 }
 .hist {
     margin: 0;
@@ -75,6 +79,12 @@ main {
 .hist a{
     text-decoration: none;
     color: var(--cor4);
+    padding: 3px;
+}
+.hist a:hover{
+    background-color: var(--cor4);
+    border-radius: 3px;
+    color: var(--cor1);
 }
 .hist a::after {
     content: '🔗';
@@ -83,13 +93,20 @@ main {
     text-align: center;
 }
 .pos {
-    margin: 0 50px 0 50px;
+    margin: auto;
+    max-width: 800px;
     background-color: white;
     padding: 10px;
 }
 .pos a {
     text-decoration: none;
     color: var(--cor4);
+    padding: 3px;
+}
+.pos a:hover{
+    background-color: var(--cor4);
+    border-radius: 3px;
+    color: var(--cor1);
 }
 .pos a::after{
     content: '🔗';
@@ -104,7 +121,8 @@ main {
 .video {
     text-align: center;
     background-color: var(--cor4);
-    margin: 0 50px 0 50px;
+    margin: auto;
+    max-width: 800px;
     padding: 10px;
 }
 .extra {
