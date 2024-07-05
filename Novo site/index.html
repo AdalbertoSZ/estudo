@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Fastcomp - Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+    	body{
+    		background-size: 100%;
+    		background: #f0f0f0;
+    		margin: 0;
+    		top: 0;
+    		left: 0;
+    	}
+    	.cover-background{
+    		width: 100%;
+    	}
+    	.entra{
+    		border: none;
+    		background-color: white;
+    		padding: 20px;
+    		border-radius: 20px;
+    		position: absolute;
+    		left: 50%;
+    		top:  50%;
+    		transform: translate(-50%,-50%);
+    		
+    	}
+    	.inputBox{
+    		position: relative;
+
+    		background: white;
+    		padding-right:  20px;
+    		border-radius: 15px;
+    		border: none;
+    	}
+    	.inputUser{
+    		background-color: white;
+            border: 1px solid black;
+            padding: 10px;
+            text-decoration: none;
+            outline: none;
+            color: black;
+            font-size: 15px;
+            width: 100%;
+            letter-spacing: 2px;
+            border-radius: 15px;
+        }
+        .labelInput{
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translate(0,-50%);
+            pointer-events: none;
+            transition: .5s;
+        }
+        .inputUser:focus ~ .labelInput,
+        .inputUser:valid ~ .labelInput{
+            top: -10px;
+            font-size: 12px;
+            color: dodgerblue;
+        }
+        .inputSubmit{
+            background-color: dodgerblue;
+            width: 100%;
+            border: none;
+            padding: 15px;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+        .inputSubmit:hover{
+            background-color: deepskyblue;
+            cursor: pointer;
+        }
+
+    </style>
+   
+</head>
+<body>
+	<img class="cover-background" src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkxOHB4IiBoZWlnaHQ9IjI2OXB4IiB2aWV3Qm94PSIwIDAgMTkxOCAyNjkiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8ZyBpZD0iUHJvZ3Jlc3NpdmVfZGlzY2xvc3VyZV9vbmJvYXJkaW5nIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8cGF0aCBkPSJNMCwwIEwxOTE3Ljk5NTQ0LDAgTDE5MTcuOTk1NDQsMTcwLjgyOTk4NyBDMTcyNS4xMjQzNiwyMDEuNDM1OTg2IDE1NTMuNDQ3OSwyMjYuNjIxMzA0IDE0MDIuOTY2MDgsMjQ2LjM4NTk0MiBDODk5LjAxOTYxOCwzMTIuNTc1NDU1IDgzOS42NzA5NjIsMjE2LjkxMDYzNCA1NzQuMzU1NTM2LDE3MC44Mjk5ODcgQzQxMS4zNzE1NTksMTQyLjUyMjUyMiAyMTkuOTE5NzEzLDE1MC4yMjM4MTggMCwxOTMuOTMzODc0IEwwLDAgWiIgaWQ9IlJlY3RhbmdsZSIgZmlsbD0iIzAyNzFFMCI+PC9wYXRoPgogICAgPC9nPgo8L3N2Zz4=">
+    <img/>
+	<div class="entra">
+		<img src="logo.png">
+		<br><br>
+		<p></p>
+		<form action="conteudo/testalogin.php" method="POST">
+		<di>
+            <div class="inputBox">
+                <input type="text" name="usuario" id="usuario" class="inputUser" required NOSHADE  >
+                <label for="nome" class="labelInput" >Usuário</label>
+            </div>
+            <br><br>
+            <div class="inputBox">
+                <input type="password" name="senha" id="senha" class="inputUser" required>
+                <label for="email" class="labelInput">Senha</label>
+            </div>
+            <br><br>
+            <input class="inputSubmit" type="submit" name="submit" value="Entrar">
+        </di>
+        </form>
+	</div>
+
+</body>
+</html>
