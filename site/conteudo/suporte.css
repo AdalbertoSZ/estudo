@@ -1,0 +1,114 @@
+body {
+	font-family: Handlee,"Dancing+Script",cursive;
+	background-color:  #4169e1;
+	padding: 10px;
+
+}
+h1, h2, h3 {
+	margin: 0;
+	font-family: Cookie,Handlee, cursive;
+	font-weight: 700;
+}
+p {
+	font-family: "Dancing+Script", Handlee, cursive;
+}
+.logo img{
+	width: 95%;
+}
+nav {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #4169e1;
+	padding: 30px;
+}
+nav ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+}
+nav ul li {
+	text-align: center;
+	width: 100%;
+	font-size: 1.2em;
+	padding: 2%;
+}
+nav ul li a {
+	display: inline-block;
+	padding: 10px 0;
+	width: 100%;
+	text-decoration: none;
+	color: #fff;
+}
+/* defeitos de impressão*/
+.container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+.container h1 {
+	color: #fff;
+	font-size: 1.2em;
+	padding: 20px ;
+}
+.container h2 {
+	color: #fff;
+	font-size: 1em;
+	padding: 10px ;
+}
+.conteudo {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	width: 100%;
+}
+.conteudo p {
+	color: #fff;
+	margin: 0;
+  	text-indent: 3ch;
+}
+.descdef {
+	
+}
+.defimg2 {
+	/*border: 1px solid red;*/
+}
+.defimg img {
+	width: 100%;
+}
+.defimg2 img {
+	width: 120px;
+}
+/*alertas*/
+.cont-unico {
+	flex-direction: column;
+}
+.cont-unico p {
+	color: #fff;
+	margin: 0;
+  	text-indent: 3ch;
+}
+@media screen and (min-width: 768px){
+	nav{
+		flex-direction: row;
+		justify-content: space-around;
+	}
+	nav ul{
+		flex-direction: row;
+		width: 70%;
+	}
+	.conteudo {
+		flex-direction: row;
+
+	}
+	.descdef {
+		padding: 30px;
+	}
+	/*alertas*/
+	.cont-unico {
+	flex-direction: column;
+	}
+}
