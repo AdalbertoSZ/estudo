@@ -162,7 +162,7 @@
         
                 <form action="patrimonio.php" method="post" id="ffiltra">
                     <p>Patrimonio.: <input type="text" name="patrimonio" class="inetq" value="" size="6" id="patr"></p>
-                    <p>Localização.: <input class="inetq" type="text" name="Lcliente" list="lcli" value= "<?php echo $tipo ?>">
+                    <p>Localização.: <input class="inetq" type="text" name="Lcliente" list="lcli" id="lcli" value= "<?php echo $tipo ?>">
                         <datalist id="lcli">
                             <?php $buscacli = "SELECT * FROM Clientes ORDER BY Cliente";
                             $achoucli = mysqli_query($banco,$buscacli);
@@ -195,8 +195,10 @@
         function lfiltro() {
             var $dvfiltro = document.getElementById("dvfiltro");
             var $patr = document.getElementById("patr");
+            var $lcli = document.getElementById("lcli");
             const $ffiltra = document.getElementById("ffiltra");
             $patr.value = "";
+            $lcli.value = "";
             $dvfiltro.style.opacity = 0;
             $ffiltra.submit();
         }
