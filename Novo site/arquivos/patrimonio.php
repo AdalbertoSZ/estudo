@@ -59,7 +59,7 @@
       <header>
         <ul class="submenu lv2" >
             <li><a onclick="filtra()" href="#">Filtra</a></li>
-            <li><a href="#">Cadastra</a></li>
+            <li><a href="nvpatrimonio.php">Cadastra</a></li>
             <li><a href="#">Transfere</a></li>
           </ul>
       </header>

@@ -139,14 +139,13 @@
             				$achoutipo = mysqli_query($banco,$buscatipo);
             				while ($ltipo = mysqli_fetch_assoc($achoutipo)) { ?>
             				<option value="<?php echo $ltipo['Tipo']; ?>" ><?php echo $ltipo['Tipo']; ?> 
-            				</option> <?php 	
-            				}
-            		 		?>
+            				</option>
+							<?php } ?>
             			
             			</datalist>
             			</td>
             		</tr>
-            		            		<tr>
+            		<tr>
             			<td>Observação.:</td>
             			<td><input class="entra" type="text" name="Observacao" placeholder="Observação" size="30" value= "<?php echo $observacao ?>" ></td>
             		</tr>

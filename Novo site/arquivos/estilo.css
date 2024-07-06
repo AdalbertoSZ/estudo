@@ -262,11 +262,10 @@ button:hover {
 .btnvrec {
     margin-bottom: 20px;
 }
-.nvetq {
+.nvetq , .nwpatr {
     margin: auto;
     margin-top: 25px;
     background-color: var(--bg-tab2);
-    /* border-collapse: collapse; */
     text-align: left;
     padding: 10px;
     border-radius: 10px;
@@ -281,9 +280,8 @@ button:hover {
 }
 .nvetq td:first-child + td {
     text-align: right;
-
 }
-.nvetq input  {
+.nvetq input {
     background-color: var(--bg-tab1);
     color: var(--txt2);
     outline: none;
@@ -291,28 +289,36 @@ button:hover {
     margin: 5px 0;
     font-size: 14px;
 }
+.nvetq input:hover , .nwpatr input:hover {
+    background-color: var(--bg-color3);
+}
+.nwpatr input {
+    background-color: var(--bg-tab1);
+    color: var(--txt2);
+    outline: none;
+    text-align: left;
+    margin: 5px 0;
+    font-size: 14px;
+}
 .nvetq p {
     margin: 5px 0;
     font-weight: bold;
 }
-.nvetq button{
+.nvetq button , .nwpatr button {
     margin: 15px 0 10px 0 ;
-    /* color: var(--txt1);
-    padding: 4px 15px;
-    border: 0px;
-    border-radius: 4px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); */
-    /* background-color: var(--bg-color2); */
 }
-.nvetq .inputsubmit {
+.nvetq .inputsubmit , .nwpatr .inputsubmit {
     color: var(--txt1);
     padding: 4px 15px;
     border: 0px;
-    border-radius: 4px;
+    border-radius: 4px; 
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
     background-color: var(--bg-color2);
 }
-.nvetq button a {
+.nvetq button a , .nwpatr button a {
     color: var(--txt1);
     
+}
+.nwpatr .rodape {
+    text-align: right;
 }
