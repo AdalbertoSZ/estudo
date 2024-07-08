@@ -289,9 +289,9 @@ button:hover {
     margin: 5px 0;
     font-size: 14px;
 }
-.nvetq input:hover , .nwpatr input:hover {
+/* .nvetq input:hover , .nwpatr input:hover {
     background-color: var(--bg-color3);
-}
+} */
 .nwpatr input {
     background-color: var(--bg-tab1);
     color: var(--txt2);

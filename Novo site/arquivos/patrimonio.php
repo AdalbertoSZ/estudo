@@ -5,7 +5,6 @@
 		//SELECT * FROM Tabela LIMIT 10;
         $patrimonio = $_POST['patrimonio'];
         $Cliente = $_POST['Lcliente'];
-        
         if (empty($patrimonio))  {
             $bpatr = '%';
         } else {
@@ -60,7 +59,7 @@
         <ul class="submenu lv2" >
             <li><a onclick="filtra()" href="#">Filtra</a></li>
             <li><a href="nvpatrimonio.php">Cadastra</a></li>
-            <li><a href="#">Transfere</a></li>
+            <li><a href="trpatrimonio.php">Transfere</a></li>
           </ul>
       </header>
       <main class="conteudo"> 
@@ -70,10 +69,10 @@
     	        $modelo = $resultado['Modelo'];
                 $serial = $resultado['Nserie'];
                 echo "<h1>Patrimonio <span class='destaque'>" .$patrimonio. "</span> Modelo <span class='destaque'>" .$modelo. "</span> Serial <span class='destaque'>" .$serial. "</span></h1>";
-                $_SESSION['etiqueta'] = $etiqueta;
+                //$_SESSION['etiqueta'] = $etiqueta;
     	        $_SESSION['modelo'] = $modelo;
                 // echo "<input type='submit' name='nvrecarga' value='Nova Recarga'></form>";
-                echo "<button class='btnvrec' type='submit' name='nvrecarga' value='nvrecarga'><a href='nrecarga.php'>Transferencia</a></button>";
+                echo "<button class='btnvrec' type='submit' name='trpatr' value='trpatr'><a href='trpatrimonio.php?patrimonio=$patrimonio'>Transferencia</a></button>";
                 $buscalocal = "SELECT * FROM VLocalizacao WHERE Patrimonio = '$patrimonio' ";
     	        $llocal = $banco->query($buscalocal);
                 echo "<table class='tbrec'>";
@@ -146,7 +145,7 @@
 						echo "<td>".$nomecli['Cliente']."</td>";
 						
 						echo "<td class='c2f'>
-                        <a class='btn btn-sm btn-primary' href='editapatrimonio.php?edcodigo=$inventario[Indice]' title='Editar'>
+                        <a class='btn btn-sm btn-primary' href='edpatrimonio.php?edcodigo=$inventario[Indice]' title='Editar'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                                 <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
                             </svg></a> </td>";

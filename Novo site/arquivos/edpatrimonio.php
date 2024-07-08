@@ -4,8 +4,15 @@
 		include_once('logado.php');
 		$Patrimonio = $_SESSION['Patrimonio'];
 		$Modelo = $_SESSION['Modelo'];
-		if (isset($_POST['gravapatr']))
+        $edcodigo = $_GET['edcodigo'];
+        //print_r($edcodigo);
+        // $buscarecarga = "SELECT * FROM Historico WHERE codigo = '$edcodigo' ";
+		// $encontrou = $banco->query($buscarecarga);
+        // print_r($_SESSION);
+        // print_r($edcodigo);
+        if (isset($_POST['atualiza']))
 		{
+            $edcod = $_SESSION['edcod'];
 		 	$Patrimonio = $_POST['Patrimonio'];
 		 	$Marca = $_POST['Marca'];
 		 	$Modelo = $_POST['Modelo'];
@@ -15,29 +22,47 @@
 		 	$Observacao = $_POST['Observacao'];
 		 	$Valor = $_POST['Valor'];
 		 	$Cliente = $_POST['Lcliente'];
-		 	//$buscaetiqueta = "SELECT * FROM Toner WHERE etiqueta = '$etiqueta' ";
-	         //$result = $banco->query($buscaetiqueta);
-	         //if(mysqli_num_rows($result) > 0)
 		 	$buscaidcli = "SELECT * FROM VClientes WHERE Cliente = '$Cliente' ";
 		 	$encidcli = $banco->query($buscaidcli);
 		 	$dadosidcli = mysqli_fetch_assoc($encidcli);
 		 	$idcli = $dadosidcli['Indice'];
-		 	$buscapatr = "SELECT * FROM VPatrimonio WHERE Patrimonio = '$Patrimonio' ";
-		 	$result = $banco->query($buscapatr);
-		 	if(mysqli_num_rows($result) > 0)
-		 	{
-		 		echo "<script> alert('Erro...: Patrimonio já cadastrado!');</script>";
-		 	}
-		 	else
-		 	{
-				
-					
-		 		$gravadados = mysqli_query ($banco, "INSERT INTO VPatrimonio (Patrimonio,Marca,Modelo,Nserie,Data,Tipo,Observacao,Valor,Idcliente) 
-		 		VALUES ('$Patrimonio','$Marca','$Modelo','$Nserie','$Data','$Tipo','$Observacao','$Valor','$idcli')") ;
+		 	//$buscapatr = "SELECT * FROM VPatrimonio WHERE Patrimonio = '$Patrimonio' ";
+		 	//$result = $banco->query($buscapatr);
+		 	//if(mysqli_num_rows($result) > 0)
+		 	//{
+		 	//	echo "<script> alert('Erro...: Patrimonio já cadastrado!');</script>";
+		 	//}
+		 	//else
+		 	//{
+            //print_r($edcodigo);
+				$sqlInsert = "UPDATE VPatrimonio SET Patrimonio='$Patrimonio',Marca='$Marca',Modelo='$Modelo',Nserie='$Nserie',Data='$Data',Tipo='$Tipo',Observacao='$Observacao',Valor='$Valor',Idcliente='$idcli' WHERE Indice='$edcod'";
+
+                $result = $banco->query($sqlInsert);
+                
+                //echo "<script type='text/javascript'>alert('$edcodigo');</script>";
 		 		header('Location: patrimonio.php');
-		 		//echo "<script> location.href='recarga.php';</script>";			
-		 	}
 		}
+        
+
+        $buscapatr = "SELECT * FROM VPatrimonio WHERE Indice = '$edcodigo' ORDER BY Indice DESC";
+        $encontrou = $banco->query($buscapatr);
+        if(mysqli_num_rows($encontrou) < 1){
+			header('Location: patrimonio.php');
+    	}
+        $_SESSION['edcod']=$edcodigo;
+        $dadospatr = mysqli_fetch_assoc($encontrou);
+        $Cliente = $dadospatr['Idcliente'];
+        //print_r($Cliente);
+        //print_r($_POST);
+        $buscaidcli = "SELECT * FROM VClientes WHERE Indice = '$Cliente' ";
+        $encidcli = $banco->query($buscaidcli);
+        $dadosidcli = mysqli_fetch_assoc($encidcli);
+        //print_r($dadosidcli);
+        $idcli = $dadosidcli['Cliente'];
+        //print_r($idcli);
+        //print_r($edcodigo);
+        //echo "<script type='text/javascript'>alert('$edcodigo');</script>";
+		
 		
 ?> 
 <!DOCTYPE html>
@@ -65,32 +90,32 @@
     </nav>
     <main>
         
-        <form action="nvpatrimonio.php" method="post">
+        <form action="edpatrimonio.php" method="post">
             
             <table class="nwpatr">
                 <tr>
                     <td>Patrimonio.:</td>
-                    <td><input type="text" name="Patrimonio" placeholder="Patrimonio" size="8" required></td>
+                    <td><input type="text" name="Patrimonio" placeholder="Patrimonio" size="8" value= "<?php echo $dadospatr['Patrimonio'];?>" required></td>
                 </tr>
                 <tr>
                     <td>Marca.:</td>
-                    <td><input type="text" name="Marca" placeholder="Marca" size="12" required></td>
+                    <td><input type="text" name="Marca" placeholder="Marca" size="12" value= "<?php echo $dadospatr['Marca'];?>" required></td>
                 </tr>
                 <tr>
                     <td>Modelo.:</td>
-                    <td><input type="text" name="Modelo" placeholder="Modelo" size="20" required></td>
+                    <td><input type="text" name="Modelo" placeholder="Modelo" size="20" value= "<?php echo $dadospatr['Modelo'];?>" required></td>
                 </tr>
                 <tr>
                     <td>Serial.:</td>
-                    <td><input type="text" name="Nserie" placeholder="Numero de série" size="16" required></td>
+                    <td><input type="text" name="Nserie" placeholder="Numero de série" size="16" value= "<?php echo $dadospatr['Nserie'];?>" required></td>
                 </tr>
                 <tr>
                     <td>Data da compra.:</td>
-                    <td><input class="entra" type="date" name="Data" id="Dtr"></td>
+                    <td><input class="entra" type="date" name="Data" id="Dtr" value= "<?php echo $dadospatr['Data'];?>"></td>
                 </tr>
                 <tr>
                     <td>Tipo.:</td>
-                    <td><input class="entra" type="text" name="Tipo" list="listatipo" size="20" value= "<?php echo $tipo ?>" required>
+                    <td><input class="entra" type="text" name="Tipo" list="listatipo" size="20" value= "<?php echo $dadospatr['Tipo'];?>" required>
             			<datalist id="listatipo">
             				<?php $buscatipo = "SELECT * FROM Tipoimp ORDER BY Tipo";
             				$achoutipo = mysqli_query($banco,$buscatipo);
@@ -102,16 +127,16 @@
                 </tr>
                 <tr>
                     <td>Observação.:</td>
-                    <td><input class="entra" type="text" name="Observacao" placeholder="Observação" size="30" value= "" ></td>
+                    <td><input class="entra" type="text" name="Observacao" placeholder="Observação" size="30" value= "<?php echo $dadospatr['Observacao'];?>"  ></td>
                 </tr>
                 <tr>
                     <td>Valor.:</td>
-                    <td><input type="text" name="Valor" placeholder="Valor" size="10" required></td>
+                    <td><input type="text" name="Valor" placeholder="Valor" size="10" value= "<?php echo $dadospatr['Valor'];?>"  required></td>
                 </tr>
                 <tr>
                     <td>Localização.:</td>
                     <td>
-                    <input class="entra" type="text" name="Lcliente" list="lcli" value= "<?php echo $tipo ?>" size="30" required>
+                    <input class="entra" type="text" name="Lcliente" list="lcli" value= "<?php echo $idcli;?>"  size="30" required>
             			<datalist id="lcli">
             				<?php $buscacli = "SELECT * FROM Clientes ORDER BY Cliente";
             				$achoucli = mysqli_query($banco,$buscacli);
@@ -126,7 +151,7 @@
                 </tr>
                 <tr>
                     <td><button><a href="patrimonio.php">Cancelar</a></button></td>
-                    <td class="rodape"><input class="inputsubmit" type="submit" name="gravapatr" value="Gravar"></td>
+                    <td class="rodape"><input class="inputsubmit" type="submit" name="atualiza" value="Atualiza"></td>
                 </tr>
             </table>
         </form>
