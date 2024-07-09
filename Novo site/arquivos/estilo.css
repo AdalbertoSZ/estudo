@@ -322,3 +322,7 @@ button:hover {
 .nwpatr .rodape {
     text-align: right;
 }
+.nwpatr h4 {
+    background-color: var(--bg-tab1);
+    color: var(--txt2);
+}
