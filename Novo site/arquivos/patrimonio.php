@@ -87,7 +87,7 @@
                 echo "<tbody>";
             
                     while ($destino = mysqli_fetch_assoc($llocal)) {
-                        echo "<tr style='border-bottom: 1px solid white;'>";
+                        //echo "<tr style='border-bottom: 1px solid white;'>";
                         
                         
                         echo "<td class='c2'>".$destino['Datatrs']."</td>";
