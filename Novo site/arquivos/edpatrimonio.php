@@ -22,7 +22,7 @@
 		 	$Observacao = $_POST['Observacao'];
 		 	$Valor = $_POST['Valor'];
 		 	$Cliente = $_POST['Lcliente'];
-		 	$buscaidcli = "SELECT * FROM VClientes WHERE Cliente = '$Cliente' ";
+		 	$buscaidcli = "SELECT * FROM Clientes WHERE Cliente = '$Cliente' ";
 		 	$encidcli = $banco->query($buscaidcli);
 		 	$dadosidcli = mysqli_fetch_assoc($encidcli);
 		 	$idcli = $dadosidcli['Indice'];
@@ -35,7 +35,7 @@
 		 	//else
 		 	//{
             //print_r($edcodigo);
-				$sqlInsert = "UPDATE VPatrimonio SET Patrimonio='$Patrimonio',Marca='$Marca',Modelo='$Modelo',Nserie='$Nserie',Data='$Data',Tipo='$Tipo',Observacao='$Observacao',Valor='$Valor',Idcliente='$idcli' WHERE Indice='$edcod'";
+				$sqlInsert = "UPDATE Patrimonio SET Patrimonio='$Patrimonio',Marca='$Marca',Modelo='$Modelo',Nserie='$Nserie',Data='$Data',Tipo='$Tipo',Observacao='$Observacao',Valor='$Valor',Idcliente='$idcli' WHERE Indice='$edcod'";
 
                 $result = $banco->query($sqlInsert);
                 
@@ -44,7 +44,7 @@
 		}
         
 
-        $buscapatr = "SELECT * FROM VPatrimonio WHERE Indice = '$edcodigo' ORDER BY Indice DESC";
+        $buscapatr = "SELECT * FROM Patrimonio WHERE Indice = '$edcodigo' ORDER BY Indice DESC";
         $encontrou = $banco->query($buscapatr);
         if(mysqli_num_rows($encontrou) < 1){
 			header('Location: patrimonio.php');
@@ -54,7 +54,7 @@
         $Cliente = $dadospatr['Idcliente'];
         //print_r($Cliente);
         //print_r($_POST);
-        $buscaidcli = "SELECT * FROM VClientes WHERE Indice = '$Cliente' ";
+        $buscaidcli = "SELECT * FROM Clientes WHERE Indice = '$Cliente' ";
         $encidcli = $banco->query($buscaidcli);
         $dadosidcli = mysqli_fetch_assoc($encidcli);
         //print_r($dadosidcli);
@@ -84,7 +84,7 @@
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
             <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
-            <li><a href="#"><i class='bx bx-cog' ></i> Configuração</a></li>
+            <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="#"><i class='bx bx-log-out' ></i> Sair</a></li>
         </ul>
     </nav>

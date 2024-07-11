@@ -43,7 +43,7 @@
             <li><a href="recarga.php" class="ativo"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
             <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
-            <li><a href="#"><i class='bx bx-cog' ></i> Configuração</a></li>
+            <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="#"><i class='bx bx-log-out' ></i> Sair</a></li>
       </ul>
     </nav>
@@ -96,7 +96,7 @@
             <tbody>
                 <?php
 					while ($dadosrecarga = mysqli_fetch_assoc($historico)) {
-						echo "<tr style='border-bottom: 1px solid white;'>";
+						echo "<tr>";
 						echo "<td class='c2'>".$dadosrecarga['codigo']."</td>";
 						echo "<td>".$dadosrecarga['etiqueta']."</td>";
 						echo "<td>".$dadosrecarga['recarga']."</td>";
@@ -144,19 +144,22 @@
         function filtra() {
             var $dvfiltro = document.getElementById("dvfiltro");
             var $etq = document.getElementById("etq");
-            $dvfiltro.style.opacity = 1;
+            //$dvfiltro.style.opacity = 1;
+            $dvfiltro.style.visibility= "visible";
             $etq.value = "C-"
         }
         function dfiltro() {
             var $dvfiltro = document.getElementById("dvfiltro");
-            $dvfiltro.style.opacity = 0;
+            //$dvfiltro.style.opacity = 0;
+            $dvfiltro.style.visibility= ("hidden");
         }
         function lfiltro() {
             var $dvfiltro = document.getElementById("dvfiltro");
             var $etq = document.getElementById("etq");
             const $ffiltra = document.getElementById("ffiltra");
             $etq.value = "C-";
-            $dvfiltro.style.opacity = 0;
+            //$dvfiltro.style.opacity = 0;
+            $dvfiltro.style.visibility= ("hidden");
             $ffiltra.submit();
         }
             

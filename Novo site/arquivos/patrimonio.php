@@ -14,7 +14,7 @@
         if (empty($Cliente))  {
             $idcli = '%';
         } else {
-            $buscaidcli = "SELECT * FROM VClientes WHERE Cliente = '$Cliente' ";
+            $buscaidcli = "SELECT * FROM Clientes WHERE Cliente = '$Cliente' ";
             $encidcli = $banco->query($buscaidcli);
             $dadosidcli = mysqli_fetch_assoc($encidcli);
             $idcli = $dadosidcli['Indice'];
@@ -24,12 +24,12 @@
         // print_r($blocal);
         //print_r($_POST);
 
-		$buscapatr = "SELECT *, DATE_FORMAT(Data,'%d-%m-%y') as Data  FROM VPatrimonio WHERE Patrimonio like '$bpatr' AND Idcliente like '$idcli' ORDER BY Indice DESC";
+		$buscapatr = "SELECT *, DATE_FORMAT(Data,'%d-%m-%y') as Data  FROM Patrimonio WHERE Patrimonio like '$bpatr' AND Idcliente like '$idcli' ORDER BY Indice DESC";
     	$listapatr = $banco->query($buscapatr);
         $numpatr =  mysqli_num_rows($listapatr);
     	$_SESSION['Patrimonio'] = $patrimonio;
 
-        $buscapatrimonio = "SELECT *, DATE_FORMAT(Data,'%d-%m-%y') as Data  FROM VPatrimonio WHERE Patrimonio like '$bpatr' AND Idcliente like '$idcli' ORDER BY Indice DESC LIMIT 50";
+        $buscapatrimonio = "SELECT *, DATE_FORMAT(Data,'%d-%m-%y') as Data  FROM Patrimonio WHERE Patrimonio like '$bpatr' AND Idcliente like '$idcli' ORDER BY Indice DESC LIMIT 50";
         $lista = $banco->query($buscapatrimonio);
     	
 ?>
@@ -51,7 +51,7 @@
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php" class="ativo"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
             <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
-            <li><a href="#"><i class='bx bx-cog' ></i> Configuração</a></li>
+            <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="#"><i class='bx bx-log-out' ></i> Sair</a></li>
       </ul>
       </nav>
@@ -73,7 +73,7 @@
     	        $_SESSION['modelo'] = $modelo;
                 // echo "<input type='submit' name='nvrecarga' value='Nova Recarga'></form>";
                 echo "<button class='btnvrec' type='submit' name='trpatr' value='trpatr'><a href='trpatrimonio.php?patrimonio=$patrimonio'>Transferencia</a></button>";
-                $buscalocal = "SELECT * FROM VLocalizacao WHERE Patrimonio = '$patrimonio' ";
+                $buscalocal = "SELECT * , DATE_FORMAT(Datatrs,'%d-%m-%Y') as Datatrs FROM Localizacao WHERE Patrimonio = '$patrimonio' ";
     	        $llocal = $banco->query($buscalocal);
                 echo "<table class='tbrec'>";
                 echo "<thead >
@@ -87,11 +87,11 @@
                 echo "<tbody>";
             
                     while ($destino = mysqli_fetch_assoc($llocal)) {
-                        //echo "<tr style='border-bottom: 1px solid white;'>";
+                        echo "<tr>";
                         
                         
                         echo "<td class='c2'>".$destino['Datatrs']."</td>";
-                        $buscacli = "SELECT * FROM VClientes WHERE Indice = $destino[Cliente] ";
+                        $buscacli = "SELECT * FROM Clientes WHERE Indice = $destino[Cliente] ";
                         $ncli = $banco->query($buscacli);
                         $nomecli = mysqli_fetch_assoc($ncli);
                         echo "<td>".$nomecli['Cliente']."</td>";
@@ -129,7 +129,7 @@
             </thead>
             <tbody>";
 					while ($inventario = mysqli_fetch_assoc($lista)) {
-						echo "<tr style='border-bottom: 1px solid white;'>";
+						echo "<tr>";
 						echo "<td class='c2'>".$inventario['Indice']."</td>";
 						echo "<td>".$inventario['Patrimonio']."</td>";
 						echo "<td>".$inventario['Marca']."</td>";
@@ -139,7 +139,7 @@
 						echo "<td>".$inventario['Tipo']."</td>";
 						echo "<td>".$inventario['Valor']."</td>";
 						echo "<td>".$inventario['Observacao']."</td>";
-						$buscacli = "SELECT * FROM VClientes WHERE Indice = $inventario[Idcliente] ";
+						$buscacli = "SELECT * FROM Clientes WHERE Indice = $inventario[Idcliente] ";
 						$ncli = $banco->query($buscacli);
 						$nomecli = mysqli_fetch_assoc($ncli);
 						echo "<td>".$nomecli['Cliente']."</td>";
@@ -184,12 +184,14 @@
         function filtra() {
             var $dvfiltro = document.getElementById("dvfiltro");
             var $patr = document.getElementById("patr");
-            $dvfiltro.style.opacity = 1;
+            // $dvfiltro.style.opacity = 1;
+            $dvfiltro.style.visibility= "visible";
             $patr.value = ""
         }
         function dfiltro() {
             var $dvfiltro = document.getElementById("dvfiltro");
-            $dvfiltro.style.opacity = 0;
+            //$dvfiltro.style.opacity = 0;
+            $dvfiltro.style.visibility= ("hidden");
         }
         function lfiltro() {
             var $dvfiltro = document.getElementById("dvfiltro");
@@ -198,7 +200,8 @@
             const $ffiltra = document.getElementById("ffiltra");
             $patr.value = "";
             $lcli.value = "";
-            $dvfiltro.style.opacity = 0;
+            //$dvfiltro.style.opacity = 0;
+            $dvfiltro.style.visibility= ("hidden");
             $ffiltra.submit();
         }
             

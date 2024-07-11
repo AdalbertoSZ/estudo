@@ -38,7 +38,7 @@
 		 	//else
 		 	//{
             //print_r($edcodigo);
-				$sqlInsert = "UPDATE VLocalizacao SET  Datatrs='$Datatrs' , Cliente='$idcli' , Anotacao='$Anotacao' WHERE Indice='$Indice'";
+				$sqlInsert = "UPDATE Localizacao SET  Datatrs='$Datatrs' , Cliente='$idcli' , Anotacao='$Anotacao' WHERE Indice='$Indice'";
 
                 $result = $banco->query($sqlInsert);
                 
@@ -47,7 +47,7 @@
 		}
         
 
-        $buscalocal = "SELECT * FROM VLocalizacao WHERE Indice = '$edcodigo' ORDER BY Indice DESC";
+        $buscalocal = "SELECT * FROM Localizacao WHERE Indice = '$edcodigo' ORDER BY Indice DESC";
         $encontrou = $banco->query($buscalocal);
         if(mysqli_num_rows($encontrou) < 1){
 			header('Location: patrimonio.php');
@@ -94,7 +94,7 @@
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
             <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
-            <li><a href="#"><i class='bx bx-cog' ></i> Configuração</a></li>
+            <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="#"><i class='bx bx-log-out' ></i> Sair</a></li>
         </ul>
     </nav>
@@ -134,7 +134,7 @@
                 </tr>
                 <tr>
                     <td>Anotacao.:</td>
-                    <td><input type="text" name="Anotacao" placeholder="Anotacao" size="15" value= "<?php echo $Anotacao ?> "  required></td>
+                    <td><input type="text" name="Anotacao" placeholder="Anotacao" size="30" value= "<?php echo $Anotacao ?> "  required></td>
                 </tr>
                 <tr>
                     <td><button><a href="patrimonio.php">Cancelar</a></button></td>

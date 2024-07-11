@@ -226,7 +226,8 @@ button:hover {
     background-color: var(--bg-div);
     align-items: center;
     margin: auto;
-    opacity: 0;
+    visibility: hidden;
+    /* opacity: 0; */
 }
 .filtro p {
     margin-top: 25px;

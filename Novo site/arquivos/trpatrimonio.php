@@ -4,7 +4,7 @@
 		include_once('logado.php');
         $edpatr = $_GET['patrimonio'];
         //print_r($edpatr);
-        $buscapatr = "SELECT * FROM VPatrimonio WHERE Patrimonio = '$edpatr' ORDER BY Indice DESC";
+        $buscapatr = "SELECT * FROM Patrimonio WHERE Patrimonio = '$edpatr' ORDER BY Indice DESC";
         $listapatr = $banco->query($buscapatr);
         $numpatr =  mysqli_num_rows($listapatr);
         $resultado = mysqli_fetch_assoc($listapatr);
@@ -24,7 +24,7 @@
 			$dadosidcli = mysqli_fetch_assoc($encidcli);
 			$idcli = $dadosidcli['Idcliente'];
 
-            $gravadados = mysqli_query ($banco, "INSERT INTO VLocalizacao (Patrimonio,Modelo,Datatrs,Cliente,Anotacao) 
+            $gravadados = mysqli_query ($banco, "INSERT INTO Localizacao (Patrimonio,Modelo,Datatrs,Cliente,Anotacao) 
 				VALUES ('$patrimonio','$modelo','$Data','$idcli','$Anotacao')") ;
 				header('Location: patrimonio.php');
         }
@@ -56,7 +56,7 @@
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
             <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
-            <li><a href="#"><i class='bx bx-cog' ></i> Configuração</a></li>
+            <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="#"><i class='bx bx-log-out' ></i> Sair</a></li>
         </ul>
     </nav>

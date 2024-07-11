@@ -18,11 +18,11 @@
 		 	//$buscaetiqueta = "SELECT * FROM Toner WHERE etiqueta = '$etiqueta' ";
 	         //$result = $banco->query($buscaetiqueta);
 	         //if(mysqli_num_rows($result) > 0)
-		 	$buscaidcli = "SELECT * FROM VClientes WHERE Cliente = '$Cliente' ";
+		 	$buscaidcli = "SELECT * FROM Clientes WHERE Cliente = '$Cliente' ";
 		 	$encidcli = $banco->query($buscaidcli);
 		 	$dadosidcli = mysqli_fetch_assoc($encidcli);
 		 	$idcli = $dadosidcli['Indice'];
-		 	$buscapatr = "SELECT * FROM VPatrimonio WHERE Patrimonio = '$Patrimonio' ";
+		 	$buscapatr = "SELECT * FROM Patrimonio WHERE Patrimonio = '$Patrimonio' ";
 		 	$result = $banco->query($buscapatr);
 		 	if(mysqli_num_rows($result) > 0)
 		 	{
@@ -32,7 +32,7 @@
 		 	{
 				
 					
-		 		$gravadados = mysqli_query ($banco, "INSERT INTO VPatrimonio (Patrimonio,Marca,Modelo,Nserie,Data,Tipo,Observacao,Valor,Idcliente) 
+		 		$gravadados = mysqli_query ($banco, "INSERT INTO Patrimonio (Patrimonio,Marca,Modelo,Nserie,Data,Tipo,Observacao,Valor,Idcliente) 
 		 		VALUES ('$Patrimonio','$Marca','$Modelo','$Nserie','$Data','$Tipo','$Observacao','$Valor','$idcli')") ;
 		 		header('Location: patrimonio.php');
 		 		//echo "<script> location.href='recarga.php';</script>";			
@@ -59,7 +59,7 @@
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
             <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
-            <li><a href="#"><i class='bx bx-cog' ></i> Configuração</a></li>
+            <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="#"><i class='bx bx-log-out' ></i> Sair</a></li>
         </ul>
     </nav>
