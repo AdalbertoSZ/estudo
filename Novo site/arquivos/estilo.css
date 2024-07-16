@@ -98,10 +98,16 @@ button:hover {
     
 }
 .lv1 {
-    margin-left: calc(100% - 620px);
+    margin-left: calc(100% - 745px);
 }
 .lv2 {
-    margin-left: calc(100% - 495px);
+    margin-left: calc(100% - 620px);
+}
+.lv4 {
+    margin-left: calc(100% - 370px);
+}
+.lv5 {
+    margin-left: calc(100% - 360px);
 }
 .submenu li {
     width: 120px;
@@ -151,6 +157,9 @@ button:hover {
     font-size: 18px;
     padding-bottom: 15px;
 }
+.opcli {
+    visibility: hidden;
+}
 .btenvia {
     color: var(--txt1);
     padding: 4px 15px;
@@ -163,6 +172,12 @@ button:hover {
 .destaque {
     font-size: 22px;
 }
+.tbbotao {
+    position: relative;
+    align-items: center;
+    margin: auto;
+    width: 300px;
+}
 .tbrec {
     position: relative;
     color: var(--txt2);
@@ -172,7 +187,9 @@ button:hover {
     border-radius: 10px 10px 0 0;
     margin: auto;
     border-color: var(--bg-color5);
+    text-align: left;
 }
+
 .tbrec thead {
     background-color: var(--bg-color4);  
     color: var(--txt3);
@@ -293,7 +310,7 @@ button:hover {
 /* .nvetq input:hover , .nwpatr input:hover {
     background-color: var(--bg-color3);
 } */
-.nwpatr input {
+.nwpatr input , .filtro .entra {
     background-color: var(--bg-tab1);
     color: var(--txt2);
     outline: none;
