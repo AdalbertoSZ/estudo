@@ -157,9 +157,6 @@ button:hover {
     font-size: 18px;
     padding-bottom: 15px;
 }
-.opcli {
-    visibility: hidden;
-}
 .btenvia {
     color: var(--txt1);
     padding: 4px 15px;
