@@ -59,7 +59,7 @@
             echo "<h1>" . $numcli . " Clientes cadastrados</h1>";
             echo "<table class='tbbotao'>
             <tr><td><button class='btnvrec' onclick='filtra()'>Filtra</button></td>
-                <td><button class='btnvrec' onclick='filtra()'>Novo Cliente</button></td>
+                <td><button class='btnvrec' onclick='nvcli()'>Novo Cliente</button></td>
             </tr>
         </table>
         
@@ -91,6 +91,17 @@
         ?>        
         
     </main>
+    <div class="dvnvcli" id="dvnvcli">
+        <form action="cadastro.php" method="post">
+            <p>Cliente.: <input class="entra" type="text" name="nvcliente" placeholder="Cliente" size="30" id="cliente" required></p>
+            <p>Data de cadastro.: <input class="entra" type="date" name="datacad" id="datacli" required></p>
+            <div class="dvbotao">
+                <button class="botao" name="cancela" value="cancela" onclick="fxnvcli()"><a href="#">Cancelar</a></button>
+                <input class="inputsubmit" type="submit" name="gravacli" value="Gravar">
+            </div>
+        </form>
+
+    </div>
     <div class="filtro" id="dvfiltro" >
         
         <form action="cadastro.php" method="post" id="ffiltra">
@@ -120,6 +131,14 @@
             $cliente.value = "";
             $dvfiltro.style.visibility= ("hidden");
             $ffiltra.submit();
+        }
+        function nvcli() {
+            var $dvnvcli = document.getElementById("dvnvcli");
+            $dvnvcli.style.visibility= "visible";
+        }
+        function fxnvcli() {
+            var $dvnvcli = document.getElementById("dvnvcli");
+            $dvnvcli.style.visibility= "hidden";
         }
     </script>
     

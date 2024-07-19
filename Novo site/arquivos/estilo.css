@@ -227,7 +227,7 @@ button:hover {
     /* text-decoration: none; */
 	color: var(--txt2);
 }
-.filtro {
+.filtro , .dvnvcli {
     position: absolute;
     border: 1px solid var(--bg-color5);
     border-radius: 15px;
@@ -243,7 +243,10 @@ button:hover {
     visibility: hidden;
     /* opacity: 0; */
 }
-.filtro p {
+/* .dvnvcli {
+    visibility: visible;
+} */
+.filtro p , .dvnvcli p {
     margin-top: 25px;
     text-align: center; 
 }
@@ -307,7 +310,7 @@ button:hover {
 /* .nvetq input:hover , .nwpatr input:hover {
     background-color: var(--bg-color3);
 } */
-.nwpatr input , .filtro .entra {
+.nwpatr input , .filtro .entra , .dvnvcli .entra {
     background-color: var(--bg-tab1);
     color: var(--txt2);
     outline: none;
