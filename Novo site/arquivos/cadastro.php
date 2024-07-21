@@ -5,15 +5,17 @@
         if (isset($_POST['gravacli'])) {
             $nvcliente = $_POST['nvcliente'];
             $nvdatacad = $_POST['datacad'];
-            $gravadados = mysqli_query ($banco, "INSERT INTO Clientes (Cliente,Datacad) 
-		 		VALUES ('$nvcliente','$nvdatacad')") ;
+            $nvdialeitura = $_POST['dialeitura'];
+            $gravadados = mysqli_query ($banco, "INSERT INTO Clientes (Cliente,Datacad,Dialeitura) 
+		 		VALUES ('$nvcliente','$nvdatacad','$nvdialeitura')") ;
 		 		header('Location: cadastro.php?opcao=clientes');
         }
         if (isset($_POST['alteracli'])) {
             $edcliente = $_POST['edcliente'];
             $eddatacad = $_POST['datacad'];
+            $eddialeitura = $_POST['dialeitura'];
             $idcli = $_SESSION['idcliente'];
-            $sqlInsert = "UPDATE Clientes SET  Cliente='$edcliente' , Datacad='$eddatacad' WHERE Indice='$idcli'";
+            $sqlInsert = "UPDATE Clientes SET  Cliente='$edcliente' , Datacad='$eddatacad' , Dialeitura='$eddialeitura' WHERE Indice='$idcli'";
 
                 $result = $banco->query($sqlInsert);
             header('Location: cadastro.php?opcao=clientes');
@@ -97,6 +99,7 @@
                     <th scope='col' class='c1'>ID</th>
                     <th scope='col'>Cliente Final</th>
                     <th scope='col'>Data de cadastro</th>
+                    <th scope='col'>Dia leitura</th>
                     <th scope='col' class='cf'>...</th>
                 </tr>
             </thead>
@@ -106,6 +109,7 @@
                 echo "<td class='c2'>".$dadoscli['Indice']."</td>";
                 echo "<td>".$dadoscli['Cliente']."</td>";
                 echo "<td>".$dadoscli['Datacad']."</td>";
+                echo "<td>".$dadoscli['Dialeitura']."</td>";
                 echo "<td class='c2f'>
                 <a class='btn btn-sm btn-primary' href='cadastro.php?edcodigo=$dadoscli[Indice]' title='Editar'>
                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
@@ -123,6 +127,7 @@
                     <form action='cadastro.php' method='post'>
                         <p>Cliente.: <input class='entra' type='text' name='edcliente' placeholder='Cliente' size='30' value='" . $dadosedcli['Cliente'] . "' required></p>
                         <p>Data de cadastro.: <input class='entra' type='date' name='datacad' value='" . $dadosedcli['Datacad'] . "' required></p>
+                        <p>Dia de leitura.: <input class='entra' type='text' name='dialeitura' size='3' value='" . $dadosedcli['Dialeitura'] . "' required></p>
                         <div class='dvbotao'>
                             <button class='botao' name='cancela' value='cancela' onclick='lfiltro()'><a href='#'>Cancelar</a></button>
                             <input class='inputsubmit' type='submit' name='alteracli' value='Alterar'>
@@ -136,6 +141,7 @@
         <form action="cadastro.php" method="post">
             <p>Cliente.: <input class="entra" type="text" name="nvcliente" placeholder="Cliente" size="30" id="cliente" required></p>
             <p>Data de cadastro.: <input class="entra" type="date" name="datacad" id="datacli" required></p>
+            <p>Dia de leitura.: <input class="entra" type="text" name="dialeitura" placeholder="Dia" size="3" required></p>
             <div class="dvbotao">
                 <button class="botao" name="cancela" value="cancela" onclick="fxnvcli()"><a href="#">Cancelar</a></button>
                 <input class="inputsubmit" type="submit" name="gravacli" value="Gravar">
