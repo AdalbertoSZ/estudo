@@ -22,26 +22,16 @@
 		 	//$Tipo = $_POST['Tipo'];
             $Cliente = $_POST['Cliente'];
             $Anotacao = $_POST['Anotacao'];
+            $Depto = $_POST['Depto'];
             $Indice = $_SESSION['Indice'];
-		 	//$Valor = $_POST['Valor'];
 		 	
 		 	$buscaidcli = "SELECT * FROM Clientes WHERE Cliente = '$Cliente' ";
 		 	$encidcli = $banco->query($buscaidcli);
 		 	$dadosidcli = mysqli_fetch_assoc($encidcli);
 		 	$idcli = $dadosidcli['Indice'];
-		 	//$buscapatr = "SELECT * FROM VPatrimonio WHERE Patrimonio = '$Patrimonio' ";
-		 	//$result = $banco->query($buscapatr);
-		 	//if(mysqli_num_rows($result) > 0)
-		 	//{
-		 	//	echo "<script> alert('Erro...: Patrimonio já cadastrado!');</script>";
-		 	//}
-		 	//else
-		 	//{
             //print_r($edcodigo);
-				$sqlInsert = "UPDATE Localizacao SET  Datatrs='$Datatrs' , Cliente='$idcli' , Anotacao='$Anotacao' WHERE Indice='$Indice'";
-
+				$sqlInsert = "UPDATE Localizacao SET  Datatrs='$Datatrs' , Cliente='$idcli' , Anotacao='$Anotacao' , Depto ='$Depto' WHERE Indice='$Indice'";
                 $result = $banco->query($sqlInsert);
-                
                 //echo "<script type='text/javascript'>alert('$edcodigo');</script>";
 		 		header('Location: patrimonio.php');
 		}
@@ -60,6 +50,7 @@
         $Datatrs = $dadoslocal['Datatrs'];
         $Cliente = $dadoslocal['Cliente'];
         $Anotacao = $dadoslocal['Anotacao'];
+        $Depto = $dadoslocal['Depto'];
         //print_r($Cliente);
         //print_r($_POST);
 
@@ -93,7 +84,7 @@
             <li><a href="inicio.html"><i class='bx bx-home' ></i> Inicio</a></li>
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
-            <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
+            <li><a href="relatorio.php"><i class='bx bx-printer'></i> Relatorios</a></li>
             <li><a href="cadastro.php"><i class='bx bx-cabinet' ></i> Cadastro</a></li>
             <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="saida.php"><i class='bx bx-log-out' ></i> Sair</a></li>
@@ -136,6 +127,10 @@
                 <tr>
                     <td>Anotacao.:</td>
                     <td><input type="text" name="Anotacao" placeholder="Anotacao" size="30" value= "<?php echo $Anotacao ?> "  required></td>
+                </tr>
+                <tr>
+                    <td>Departamento.:</td>
+                    <td><input type="text" name="Depto" placeholder="Departamento" size="20" value= "<?php echo $Depto ?> "  ></td>
                 </tr>
                 <tr>
                     <td><button><a href="patrimonio.php">Cancelar</a></button></td>

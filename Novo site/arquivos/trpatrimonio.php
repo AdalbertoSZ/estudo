@@ -19,13 +19,16 @@
             $Cliente = $_POST['Lcliente'];
             $Data = $_POST['Data'];
 			$Anotacao = $_POST['Anotacao'];
+            $Depto = $_POST['Depto'];
 			$buscaidcli = "SELECT * FROM Clientes WHERE Cliente = '$Cliente' ";
 			$encidcli = $banco->query($buscaidcli);
 			$dadosidcli = mysqli_fetch_assoc($encidcli);
-			$idcli = $dadosidcli['Idcliente'];
+			$idcli = $dadosidcli['Indice'];
 
-            $gravadados = mysqli_query ($banco, "INSERT INTO Localizacao (Patrimonio,Modelo,Datatrs,Cliente,Anotacao) 
-				VALUES ('$patrimonio','$modelo','$Data','$idcli','$Anotacao')") ;
+            $gravadados = mysqli_query ($banco, "INSERT INTO Localizacao (Patrimonio,Modelo,Datatrs,Cliente,Anotacao,Depto) 
+				VALUES ('$patrimonio','$modelo','$Data','$idcli','$Anotacao','$Depto')") ;
+            $sqlInsert = "UPDATE Patrimonio SET Idcliente='$idcli' , Depto='$Depto' WHERE Patrimonio=$patrimonio";
+            $result = $banco->query($sqlInsert);
 				header('Location: patrimonio.php');
         }
         $listacli = "";
@@ -55,7 +58,7 @@
             <li><a href="inicio.html"><i class='bx bx-home' ></i> Inicio</a></li>
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
-            <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
+            <li><a href="relatorio.php"><i class='bx bx-printer'></i> Relatorios</a></li>
             <li><a href="cadastro.php"><i class='bx bx-cabinet' ></i> Cadastro</a></li>
             <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="saida.php"><i class='bx bx-log-out' ></i> Sair</a></li>
@@ -96,6 +99,10 @@
                     <tr>
                         <td>Anotação</td>
                         <td><input type='text' name='Anotacao' placeholder='Anotação' required></td>
+                    </tr>
+                    <tr>
+                        <td>Departamento</td>
+                        <td><input type='text' name='Depto' placeholder='Departamento'></td>
                     </tr>
                     <tr>
                         <td><button><a href='patrimonio.php'>Cancelar</a></button></td>

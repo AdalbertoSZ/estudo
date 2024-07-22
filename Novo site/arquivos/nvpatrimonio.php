@@ -15,6 +15,7 @@
 		 	$Observacao = $_POST['Observacao'];
 		 	$Valor = $_POST['Valor'];
 		 	$Cliente = $_POST['Lcliente'];
+            $Depto = $_POST['Depto'];
 		 	//$buscaetiqueta = "SELECT * FROM Toner WHERE etiqueta = '$etiqueta' ";
 	         //$result = $banco->query($buscaetiqueta);
 	         //if(mysqli_num_rows($result) > 0)
@@ -32,8 +33,8 @@
 		 	{
 				
 					
-		 		$gravadados = mysqli_query ($banco, "INSERT INTO Patrimonio (Patrimonio,Marca,Modelo,Nserie,Data,Tipo,Observacao,Valor,Idcliente) 
-		 		VALUES ('$Patrimonio','$Marca','$Modelo','$Nserie','$Data','$Tipo','$Observacao','$Valor','$idcli')") ;
+		 		$gravadados = mysqli_query ($banco, "INSERT INTO Patrimonio (Patrimonio,Marca,Modelo,Nserie,Data,Tipo,Observacao,Valor,Idcliente,Depto) 
+		 		VALUES ('$Patrimonio','$Marca','$Modelo','$Nserie','$Data','$Tipo','$Observacao','$Valor','$idcli','$Depto')") ;
 		 		header('Location: patrimonio.php');
 		 		//echo "<script> location.href='recarga.php';</script>";			
 		 	}
@@ -58,7 +59,7 @@
             <li><a href="inicio.html"><i class='bx bx-home' ></i> Inicio</a></li>
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
-            <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
+            <li><a href="relatorio.php"><i class='bx bx-printer'></i> Relatorios</a></li>
             <li><a href="cadastro.php"><i class='bx bx-cabinet' ></i> Cadastro</a></li>
             <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
             <li><a href="saida.php"><i class='bx bx-log-out' ></i> Sair</a></li>
@@ -124,6 +125,10 @@
             			
             			</datalist>
                     </td>
+                </tr>
+                <tr>
+                    <td>Departamento.:</td>
+                    <td><input type="text" name="Depto" placeholder="Departamento" size="20"></td>
                 </tr>
                 <tr>
                     <td><button><a href="patrimonio.php">Cancelar</a></button></td>
