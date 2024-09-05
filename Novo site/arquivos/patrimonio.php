@@ -19,10 +19,6 @@
             $dadosidcli = mysqli_fetch_assoc($encidcli);
             $idcli = $dadosidcli['Indice'];
         }
-        // print_r($patrimonio);
-        // print_r($localizacao);
-        // print_r($blocal);
-        //print_r($_POST);
 
 		$buscapatr = "SELECT *, DATE_FORMAT(Data,'%d-%m-%y') as Data  FROM Patrimonio WHERE Patrimonio like '$bpatr' AND Idcliente like '$idcli' ORDER BY Indice DESC";
     	$listapatr = $banco->query($buscapatr);
@@ -50,10 +46,11 @@
             <li><a href="inicio.html"><i class='bx bx-home' ></i> Inicio</a></li>
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php" class="ativo"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
-            <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
+            <li><a href="relatorio.php
+            "><i class='bx bx-printer'></i> Relatorios</a></li>
             <li><a href="cadastro.php"><i class='bx bx-cabinet' ></i> Cadastro</a></li>
             <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
-            <li><a href="#"><i class='bx bx-log-out' ></i> Sair</a></li>
+            <li><a href="saida.php"><i class='bx bx-log-out' ></i> Sair</a></li>
       </ul>
       </nav>
       <header>
@@ -67,6 +64,7 @@
       <?php  
             if ( $numpatr == 1 ) {
                 $resultado = mysqli_fetch_assoc($listapatr);
+                $patrimonio =$resultado['Patrimonio'];
     	        $modelo = $resultado['Modelo'];
                 $serial = $resultado['Nserie'];
                 echo "<h1>Patrimonio <span class='destaque'>" .$patrimonio. "</span> Modelo <span class='destaque'>" .$modelo. "</span> Serial <span class='destaque'>" .$serial. "</span></h1>";
@@ -74,7 +72,7 @@
     	        $_SESSION['modelo'] = $modelo;
                 // echo "<input type='submit' name='nvrecarga' value='Nova Recarga'></form>";
                 echo "<button class='btnvrec' type='submit' name='trpatr' value='trpatr'><a href='trpatrimonio.php?patrimonio=$patrimonio'>Transferencia</a></button>";
-                $buscalocal = "SELECT * , DATE_FORMAT(Datatrs,'%d-%m-%Y') as Datatrs FROM Localizacao WHERE Patrimonio = '$patrimonio' ";
+                $buscalocal = "SELECT * , DATE_FORMAT(Datatrs,'%d-%m-%Y') as Datatrs FROM Localizacao WHERE Patrimonio = '$patrimonio' ORDER BY Indice DESC";
     	        $llocal = $banco->query($buscalocal);
                 echo "<table class='tbrec'>";
                 echo "<thead >
@@ -82,6 +80,7 @@
                             <th scope='col' class='c1'>Data Transferencia</th>
                             <th scope='col'>Cliente</th>
                             <th scope='col'>Anotação</th>
+                            <th scope='col'>Departamento</th>
                             <th scope='col' class='cf'>...</th>
                         </tr>
                     </thead>";
@@ -97,7 +96,7 @@
                         $nomecli = mysqli_fetch_assoc($ncli);
                         echo "<td>".$nomecli['Cliente']."</td>";
                         echo "<td>".$destino['Anotacao']."</td>";
-                        
+                        echo "<td>".$destino['Depto']."</td>";
                         echo "<td class='c2f'>
                         <a class='btn btn-sm btn-primary' href='edtrpatr.php?edcodigo=$destino[Indice]' title='Editar'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
@@ -125,6 +124,7 @@
                     <th scope='col'>Valor</th>
                     <th scope='col'>Observação</th>
                     <th scope='col'>Localização</th>
+                    <th scope='col'>Departamento</th>
                     <th scope='col' class='cf'>...</th>
                 </tr>
             </thead>
@@ -144,7 +144,7 @@
 						$ncli = $banco->query($buscacli);
 						$nomecli = mysqli_fetch_assoc($ncli);
 						echo "<td>".$nomecli['Cliente']."</td>";
-						
+						echo "<td>".$inventario['Depto']."</td>";
 						echo "<td class='c2f'>
                         <a class='btn btn-sm btn-primary' href='edpatrimonio.php?edcodigo=$inventario[Indice]' title='Editar'>
                             <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
@@ -162,16 +162,17 @@
         
                 <form action="patrimonio.php" method="post" id="ffiltra">
                     <p>Patrimonio.: <input type="text" name="patrimonio" class="inetq" value="" size="6" id="patr"></p>
-                    <p>Localização.: <input class="inetq" type="text" name="Lcliente" list="lcli" id="lcli" value= "<?php echo $tipo ?>">
+                    <p>Localização.: <input class="inetq" type="text" name="Lcliente" list="lcli" value= "">
                         <datalist id="lcli">
-                            <?php $buscacli = "SELECT * FROM Clientes ORDER BY Cliente";
-                            $achoucli = mysqli_query($banco,$buscacli);
-                            while ($lclie = mysqli_fetch_assoc($achoucli)) { ?>
-                            <option value="<?php echo $lclie['Cliente']; ?>" ><?php echo $lclie['Cliente']; ?>
-                            </option> <?php
-                            }
-                            ?>                      
-                        </datalist></p>
+            				<?php $buscacli = "SELECT * FROM Clientes ORDER BY Cliente";
+            				$achoucli = mysqli_query($banco,$buscacli);
+            				while ($lclie = mysqli_fetch_assoc($achoucli)) { ?>
+            				<option value="<?php echo $lclie['Cliente']; ?>" ><?php echo $lclie['Cliente']; ?> 
+            				</option> <?php 	
+            				}
+            		 		?>
+            			
+            			</datalist></p>
                     <div class="dvbotao">
                         <button class="botao" name="cancela" value="cancela" onclick="dfiltro()"><a href="#">Cancelar</a></button>
                         <button class="botao" name="limpaf" value="limpaf" onclick="lfiltro()"><a href="#">Limpa filtro</a></button>

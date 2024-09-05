@@ -35,9 +35,7 @@
       //  $endereco = $_POST['endereco'];
         
         $sqlInsert = "UPDATE Historico 
-        SET etiqueta='$etiqueta',recarga='$recarga',pesoinicial='$pesoinicial',po='$po',lixo='$lixo',pesofinal='$pesofinal',tempo='$tempo',cilindro='$cilindro',developer='$developer',pcr='$pcr',ldos='$ldos',llimp='$llimp',chip='$chip',observacao='$observacao',tecnico='$tecnico'
-      
-        WHERE codigo=$codigo";
+        SET etiqueta='$etiqueta',recarga='$recarga',pesoinicial='$pesoinicial',po='$po',lixo='$lixo',pesofinal='$pesofinal',tempo='$tempo',cilindro='$cilindro',developer='$developer',pcr='$pcr',ldos='$ldos',llimp='$llimp',chip='$chip',observacao='$observacao',tecnico='$tecnico' WHERE codigo=$codigo";
         $result = $banco->query($sqlInsert);
         //print_r($result);
     }

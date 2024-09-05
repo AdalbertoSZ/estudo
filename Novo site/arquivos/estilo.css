@@ -227,7 +227,7 @@ button:hover {
     /* text-decoration: none; */
 	color: var(--txt2);
 }
-.filtro , .dvnvcli {
+.filtro , .dvnvcli , .dvedcli {
     position: absolute;
     border: 1px solid var(--bg-color5);
     border-radius: 15px;
@@ -243,10 +243,11 @@ button:hover {
     visibility: hidden;
     /* opacity: 0; */
 }
-/* .dvnvcli {
+.dvedcli {
     visibility: visible;
-} */
-.filtro p , .dvnvcli p {
+    top: 50px;
+} 
+.filtro p , .dvnvcli p , .dvedcli p {
     margin-top: 25px;
     text-align: center; 
 }
@@ -310,7 +311,7 @@ button:hover {
 /* .nvetq input:hover , .nwpatr input:hover {
     background-color: var(--bg-color3);
 } */
-.nwpatr input , .filtro .entra , .dvnvcli .entra {
+.nwpatr input , .filtro .entra , .entra {
     background-color: var(--bg-tab1);
     color: var(--txt2);
     outline: none;

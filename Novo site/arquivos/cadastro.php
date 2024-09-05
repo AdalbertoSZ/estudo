@@ -2,6 +2,24 @@
 		session_start();
 		include_once('conecta.php');
 		include_once('logado.php');
+        if (isset($_POST['gravacli'])) {
+            $nvcliente = $_POST['nvcliente'];
+            $nvdatacad = $_POST['datacad'];
+            $nvdialeitura = $_POST['dialeitura'];
+            $gravadados = mysqli_query ($banco, "INSERT INTO Clientes (Cliente,Datacad,Dialeitura) 
+		 		VALUES ('$nvcliente','$nvdatacad','$nvdialeitura')") ;
+		 		header('Location: cadastro.php?opcao=clientes');
+        }
+        if (isset($_POST['alteracli'])) {
+            $edcliente = $_POST['edcliente'];
+            $eddatacad = $_POST['datacad'];
+            $eddialeitura = $_POST['dialeitura'];
+            $idcli = $_SESSION['idcliente'];
+            $sqlInsert = "UPDATE Clientes SET  Cliente='$edcliente' , Datacad='$eddatacad' , Dialeitura='$eddialeitura' WHERE Indice='$idcli'";
+
+                $result = $banco->query($sqlInsert);
+            header('Location: cadastro.php?opcao=clientes');
+        }
         if (isset($_POST['cliente'])){
             $cliente = $_POST['cliente'];
             $cliente = '%' . $cliente . '%';
@@ -9,15 +27,27 @@
         } else {
             $cliente = '%';
         }
-        $buscacli = "SELECT * FROM Clientes WHERE Cliente LIKE '$cliente' ORDER BY Cliente  ";
+        $buscacli = "SELECT * , DATE_FORMAT(Datacad,'%d-%m-%Y') as Datacad FROM Clientes WHERE Cliente LIKE '$cliente' ORDER BY Cliente  ";
         $listacli = $banco->query($buscacli);
         $numcli =  mysqli_num_rows($listacli);
         if (isset($_GET['opcao'])){
             $winclion = 'ligado';
             //print_r($winclion);
         }
-        //$winclion = 'ligado';
+        if (isset($_GET['edcodigo'])){
+            $codcli = $_GET['edcodigo'];
+            $buscaedcli = "SELECT * FROM Clientes WHERE Indice = '$codcli'";
+            $encedcli = $banco->query($buscaedcli);
+            $dadosedcli = mysqli_fetch_assoc($encedcli);
+            $winedcli = 'ligado';
+            // print_r($codcli);
+            // print_r($numcli);
+            // print_r($dadosedcli);
+        }   
         
+            $buscaidcli = "SELECT * FROM Clientes WHERE Cliente = '$Cliente' ";
+		 	$encidcli = $banco->query($buscaidcli);
+		 	$dadosidcli = mysqli_fetch_assoc($encidcli);
     	
 ?>
 <!DOCTYPE html>
@@ -38,10 +68,10 @@
             <li><a href="inicio.html"><i class='bx bx-home' ></i> Inicio</a></li>
             <li><a href="recarga.php"><i class='bx bx-wrench' ></i> Recarga</a></li>   
             <li><a href="patrimonio.php"><i class='bx bx-desktop' ></i> Patrimonio</a></li>
-            <li><a href="#"><i class='bx bx-printer'></i> Relatorios</a></li>
+            <li><a href="relatorio.php"><i class='bx bx-printer'></i> Relatorios</a></li>
             <li><a href="cadastro.php" class="ativo"><i class='bx bx-cabinet' ></i> Cadastro</a></li>
             <li><a href="configura.php"><i class='bx bx-cog' ></i> Configuração</a></li>
-            <li><a href="#"><i class='bx bx-log-out' ></i> Sair</a></li>
+            <li><a href="saida.php"><i class='bx bx-log-out' ></i> Sair</a></li>
         </ul> 
     </nav>
     <header>
@@ -69,6 +99,7 @@
                     <th scope='col' class='c1'>ID</th>
                     <th scope='col'>Cliente Final</th>
                     <th scope='col'>Data de cadastro</th>
+                    <th scope='col'>Dia leitura</th>
                     <th scope='col' class='cf'>...</th>
                 </tr>
             </thead>
@@ -78,8 +109,9 @@
                 echo "<td class='c2'>".$dadoscli['Indice']."</td>";
                 echo "<td>".$dadoscli['Cliente']."</td>";
                 echo "<td>".$dadoscli['Datacad']."</td>";
+                echo "<td>".$dadoscli['Dialeitura']."</td>";
                 echo "<td class='c2f'>
-                <a class='btn btn-sm btn-primary' href='edita.php?edcodigo=$dadosrecarga[codigo]' title='Editar'>
+                <a class='btn btn-sm btn-primary' href='cadastro.php?edcodigo=$dadoscli[Indice]' title='Editar'>
                     <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-pencil' viewBox='0 0 16 16'>
                         <path d='M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z'/>
                     </svg></a> </td>";
@@ -89,12 +121,27 @@
         </table>";
         }
         ?>        
-        
+        <?php if ($winedcli == 'ligado') {
+            $_SESSION['idcliente'] = $codcli;
+            echo "<div class='dvedcli' id='dvedcli'>
+                    <form action='cadastro.php' method='post'>
+                        <p>Cliente.: <input class='entra' type='text' name='edcliente' placeholder='Cliente' size='30' value='" . $dadosedcli['Cliente'] . "' required></p>
+                        <p>Data de cadastro.: <input class='entra' type='date' name='datacad' value='" . $dadosedcli['Datacad'] . "' required></p>
+                        <p>Dia de leitura.: <input class='entra' type='text' name='dialeitura' size='3' value='" . $dadosedcli['Dialeitura'] . "' required></p>
+                        <div class='dvbotao'>
+                            <button class='botao' name='cancela' value='cancela' onclick='lfiltro()'><a href='#'>Cancelar</a></button>
+                            <input class='inputsubmit' type='submit' name='alteracli' value='Alterar'>
+                        </div>
+                    </form>
+                </div>";
+        }
+        ?>
     </main>
     <div class="dvnvcli" id="dvnvcli">
         <form action="cadastro.php" method="post">
             <p>Cliente.: <input class="entra" type="text" name="nvcliente" placeholder="Cliente" size="30" id="cliente" required></p>
             <p>Data de cadastro.: <input class="entra" type="date" name="datacad" id="datacli" required></p>
+            <p>Dia de leitura.: <input class="entra" type="text" name="dialeitura" placeholder="Dia" size="3" required></p>
             <div class="dvbotao">
                 <button class="botao" name="cancela" value="cancela" onclick="fxnvcli()"><a href="#">Cancelar</a></button>
                 <input class="inputsubmit" type="submit" name="gravacli" value="Gravar">
@@ -102,6 +149,7 @@
         </form>
 
     </div>
+    
     <div class="filtro" id="dvfiltro" >
         
         <form action="cadastro.php" method="post" id="ffiltra">
